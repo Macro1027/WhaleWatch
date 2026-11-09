@@ -1,0 +1,35 @@
+# WhaleWatch demo config. Everything demo-visible is driven from here.
+# Changing a value here must change the replay deterministically (via seed).
+
+seed: 42
+
+market:
+  duration_s: 600.0
+  dt_s: 0.1
+  base_mid: 60000.0
+  vol_bps_per_sec: 2.0
+  base_trade_lambda: 2.0
+  whale_start_s: 180.0
+  whale_end_s: 270.0
+  whale_peak_impact_bps: 50.0
+  post_whale_revert_frac: 0.5
+  whale_trade_lambda: 20.0
+  whale_buy_frac: 0.90
+  whale_ramp_frac: 0.25
+
+execution:
+  target_qty: 2.0
+  slice_count: 20
+  deadline_s: 600.0
+  side: buy
+  half_spread_bps: 1.0
+
+gated:
+  # Threshold is absolute 1s signed trade imbalance. Phase-0 experiment showed
+  # thresholds 5..15 all deliver ~3bp IS savings, with 7 the most robust.
+  threshold: 7.0
+  cooldown_steps: 50     # 5s at dt_s=0.1
+  imbalance_window_steps: 10  # 1s at dt_s=0.1
+
+eval:
+  fee_bps: 1.0
